@@ -1,84 +1,14 @@
 <ion-header>
-
-  <ion-toolbar>
-    <ion-segment [(ngModel)]="accion">
-      <ion-segment-button value="proyecto">
-        Proyecto
-      </ion-segment-button>
-      <ion-segment-button value="stock">
-        Inventario
-      </ion-segment-button>
-      <ion-segment-button value="historial">
-        Historial
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
 </ion-header>
 
-<ion-content>
-
-  <div [ngSwitch]="accion">
-
-    <ion-list *ngSwitchCase="'proyecto'">
-      
-      <ion-item *ngFor="let proyecto of proyectos; let i = index">
-        <ion-card>
-
-          <ion-card-header>
-            <ion-list no-lines>
-              <ion-item>
-                <h2>{{proyecto.nombre}}</h2>
-                <ion-note item-right>
-                  <ion-icon name='close' (click)="eliminar(i)"></ion-icon>
-                </ion-note>
-              </ion-item>
-            </ion-list>
-          </ion-card-header>
-
-          <ion-card-content (click)="start(proyecto)">
-            <ion-list no-lines>
-              <ion-item>
-                <h1>{{proyecto.tiempo}}</h1>
-                <ion-note item-right>
-                  <ion-icon name='{{proyecto.icono}}' color="{{proyecto.color}}"></ion-icon>
-                </ion-note>
-              </ion-item>
-            </ion-list>
-          </ion-card-content>
-
-          <button ion-button block (click)="terminarP(proyecto)">Terminar Proyecto</button>
-
-        </ion-card>
-      </ion-item>
-
-      <p *ngIf="proyectos.length == 0" padding>No hay proyectos activos</p>
-      
-    </ion-list>
-
-
-
-    <ion-list *ngSwitchCase="'stock'">
-      <ion-item *ngFor="let producto of productos; let i = index">
-        <ion-label>
-          {{producto.nombre}}
-          <p>{{producto.pzas}} {{producto.txt1}} > {{producto.precio | currency:'USD':true:'1.2-2'}} {{producto.txt2}}</p>
-        </ion-label>
-        <ion-note item-right>
-          <ion-icon name='close' (click)="eliminarP(i)"></ion-icon>
-        </ion-note>
-      </ion-item>
-
-      <p *ngIf="productos.length == 0" padding>No tienes consumibles</p>
-
-    </ion-list>
-
-  </div>
-
-  <ion-fab center bottom *ngIf="this.accion != 'historial'">
-    <button ion-fab (click)="nuevo()">
-      <ion-icon name="add"></ion-icon>
-    </button>    
-  </ion-fab>
-
+<ion-content padding>
+  The world is your oyster.
+  <p>
+    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
+  </p>
 </ion-content>
