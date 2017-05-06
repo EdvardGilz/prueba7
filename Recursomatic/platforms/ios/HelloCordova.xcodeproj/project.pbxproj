@@ -21,6 +21,11 @@
 		B2467AC3229E4FF6864AF98C /* CDVViewController+SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8DDD028CD14B6C9BF5C865 /* CDVViewController+SplashScreen.m */; };
 		E971C6B2ABAD454AAFEC9BC6 /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAF91395A4F49489DBBA8E9 /* CDVStatusBar.m */; };
 		1E190DF1A310497F97138F67 /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A27B38FD7794C4EA295701F /* IonicKeyboard.m */; };
+		F74F96BA1D7945B0B17173A0 /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F95E7F5CA0724A27AFB7F8D9 /* SQLitePlugin.m */; };
+		09FEAA91B86C480A8BEC5411 /* sqlite3.c in Resources */ = {isa = PBXBuildFile; fileRef = 5CB3AC476F324B5D90AD19A4 /* sqlite3.c */; settings = {COMPILER_FLAGS = "-DSQLITE_THREADSAFE=1 -DSQLITE_DEFAULT_MEMSTATUS=0 -DSQLITE_OMIT_DECLTYPE -DSQLITE_OMIT_DEPRECATED -DSQLITE_OMIT_PROGRESS_CALLBACK -DSQLITE_OMIT_SHARED_CACHE -DSQLITE_TEMP_STORE=2 -DSQLITE_OMIT_LOAD_EXTENSION -DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS3_PARENTHESIS -DSQLITE_ENABLE_FTS4 -DSQLITE_ENABLE_RTREE -DSQLITE_DEFAULT_PAGE_SIZE=1024 -DSQLITE_DEFAULT_CACHE_SIZE=2000"; }; };
+		26CA07E5D0374F549BD480C7 /* APPBackgroundMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC91B786CB84DBABB7CD859 /* APPBackgroundMode.m */; };
+		6242FBB0290044F2850861BF /* APPMethodMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = E7EB2E825D8D49B3B9EA7F4E /* APPMethodMagic.m */; };
+		E290A691D9B6401A975113F9 /* appbeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C0191607EBA46268FA9349A /* appbeep.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +77,15 @@
 		454CE24DF0BE43F489866630 /* CDVStatusBar.h */ = {isa = PBXFileReference; name = "CDVStatusBar.h"; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		3A27B38FD7794C4EA295701F /* IonicKeyboard.m */ = {isa = PBXFileReference; name = "IonicKeyboard.m"; path = "ionic-plugin-keyboard/IonicKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		ADFCF02BB333431EB50DA6C0 /* IonicKeyboard.h */ = {isa = PBXFileReference; name = "IonicKeyboard.h"; path = "ionic-plugin-keyboard/IonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		F95E7F5CA0724A27AFB7F8D9 /* SQLitePlugin.m */ = {isa = PBXFileReference; name = "SQLitePlugin.m"; path = "cordova-sqlite-storage/SQLitePlugin.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		5CB3AC476F324B5D90AD19A4 /* sqlite3.c */ = {isa = PBXFileReference; name = "sqlite3.c"; path = "cordova-sqlite-storage/sqlite3.c"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		76071C3504AB4EC795EB4959 /* SQLitePlugin.h */ = {isa = PBXFileReference; name = "SQLitePlugin.h"; path = "cordova-sqlite-storage/SQLitePlugin.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		A699B82675664765A009E94E /* sqlite3.h */ = {isa = PBXFileReference; name = "sqlite3.h"; path = "cordova-sqlite-storage/sqlite3.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		FAC91B786CB84DBABB7CD859 /* APPBackgroundMode.m */ = {isa = PBXFileReference; name = "APPBackgroundMode.m"; path = "cordova-plugin-background-mode/APPBackgroundMode.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		E7EB2E825D8D49B3B9EA7F4E /* APPMethodMagic.m */ = {isa = PBXFileReference; name = "APPMethodMagic.m"; path = "cordova-plugin-background-mode/APPMethodMagic.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		A31EEDD8CA33479BA9BD310E /* APPBackgroundMode.h */ = {isa = PBXFileReference; name = "APPBackgroundMode.h"; path = "cordova-plugin-background-mode/APPBackgroundMode.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		220262F102CE4F7282A06AF6 /* APPMethodMagic.h */ = {isa = PBXFileReference; name = "APPMethodMagic.h"; path = "cordova-plugin-background-mode/APPMethodMagic.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		7C0191607EBA46268FA9349A /* appbeep.wav */ = {isa = PBXFileReference; name = "appbeep.wav"; path = "appbeep.wav"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +155,7 @@
 				0207DA571B56EA530066E2B4 /* Images.xcassets */,
 				3047A50E1AB8057F00498E2A /* config */,
 				8D1107310486CEB800E47090 /* HelloCordova-Info.plist */,
+				7C0191607EBA46268FA9349A /* appbeep.wav */,
 			);
 			name = Resources;
 			path = "HelloCordova/Resources";
@@ -186,6 +201,14 @@
 				454CE24DF0BE43F489866630 /* CDVStatusBar.h */,
 				3A27B38FD7794C4EA295701F /* IonicKeyboard.m */,
 				ADFCF02BB333431EB50DA6C0 /* IonicKeyboard.h */,
+				F95E7F5CA0724A27AFB7F8D9 /* SQLitePlugin.m */,
+				5CB3AC476F324B5D90AD19A4 /* sqlite3.c */,
+				76071C3504AB4EC795EB4959 /* SQLitePlugin.h */,
+				A699B82675664765A009E94E /* sqlite3.h */,
+				FAC91B786CB84DBABB7CD859 /* APPBackgroundMode.m */,
+				E7EB2E825D8D49B3B9EA7F4E /* APPMethodMagic.m */,
+				A31EEDD8CA33479BA9BD310E /* APPBackgroundMode.h */,
+				220262F102CE4F7282A06AF6 /* APPMethodMagic.h */,
 			);
 			name = Plugins;
 			path = "HelloCordova/Plugins";
@@ -269,6 +292,7 @@
 				3047A5141AB8059700498E2A /* build.xcconfig in Resources */,
 				0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */,
 				3047A5121AB8059700498E2A /* build-debug.xcconfig in Resources */,
+				E290A691D9B6401A975113F9 /* appbeep.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +330,10 @@
 				B2467AC3229E4FF6864AF98C /* CDVViewController+SplashScreen.m in Sources */,
 				E971C6B2ABAD454AAFEC9BC6 /* CDVStatusBar.m in Sources */,
 				1E190DF1A310497F97138F67 /* IonicKeyboard.m in Sources */,
+				F74F96BA1D7945B0B17173A0 /* SQLitePlugin.m in Sources */,
+				09FEAA91B86C480A8BEC5411 /* sqlite3.c in Resources */,
+				26CA07E5D0374F549BD480C7 /* APPBackgroundMode.m in Sources */,
+				6242FBB0290044F2850861BF /* APPMethodMagic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
