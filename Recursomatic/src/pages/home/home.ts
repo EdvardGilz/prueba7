@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController, ActionSheetController, Platform, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 import { Resumen } from '../resumen/resumen';
 import { Detalle } from '../detalle/detalle';
@@ -21,7 +22,8 @@ export class HomePage {
               public storage: Storage,
               public actionSheetCtrl: ActionSheetController,
               public platform: Platform,
-              public modalCtrl: ModalController) {
+              public modalCtrl: ModalController,
+              private backgroundMode: BackgroundMode) {
     
     this.storage.ready().then(() => {
       this.storage.get("proyectos").then((data) => {
@@ -40,6 +42,8 @@ export class HomePage {
         }
       });
     });
+
+    this.backgroundMode.enable();
   }
 
   verificarProductos() {
