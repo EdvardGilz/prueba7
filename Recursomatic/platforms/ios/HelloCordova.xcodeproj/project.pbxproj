@@ -21,6 +21,8 @@
 		56D49E14904F442DACDC65C8 /* CDVViewController+SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = C13340DCD0124A86ACEB8C0F /* CDVViewController+SplashScreen.m */; };
 		EDE004E29B4C41029C2621F9 /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BA3A3A66FD442FA86FE25B /* CDVStatusBar.m */; };
 		57F024296FF8472E8F5B70D9 /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E0D72CD12E4589B4452E7D /* IonicKeyboard.m */; };
+		2EA4BDEE3B4B45FFB6F2E958 /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4D08DE45B2499F89882D00 /* SQLitePlugin.m */; };
+		06BC27ADB46B4002A3215313 /* sqlite3.c in Resources */ = {isa = PBXBuildFile; fileRef = 629C98336B22415DA1B077B0 /* sqlite3.c */; settings = {COMPILER_FLAGS = "-DSQLITE_THREADSAFE=1 -DSQLITE_DEFAULT_MEMSTATUS=0 -DSQLITE_OMIT_DECLTYPE -DSQLITE_OMIT_DEPRECATED -DSQLITE_OMIT_PROGRESS_CALLBACK -DSQLITE_OMIT_SHARED_CACHE -DSQLITE_TEMP_STORE=2 -DSQLITE_OMIT_LOAD_EXTENSION -DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS3_PARENTHESIS -DSQLITE_ENABLE_FTS4 -DSQLITE_ENABLE_RTREE -DSQLITE_DEFAULT_PAGE_SIZE=1024 -DSQLITE_DEFAULT_CACHE_SIZE=2000"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,10 @@
 		0829FD28C0764EA69503EFD2 /* CDVStatusBar.h */ = {isa = PBXFileReference; name = "CDVStatusBar.h"; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		32E0D72CD12E4589B4452E7D /* IonicKeyboard.m */ = {isa = PBXFileReference; name = "IonicKeyboard.m"; path = "ionic-plugin-keyboard/IonicKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		555D023D0DDD437A84044126 /* IonicKeyboard.h */ = {isa = PBXFileReference; name = "IonicKeyboard.h"; path = "ionic-plugin-keyboard/IonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		4D4D08DE45B2499F89882D00 /* SQLitePlugin.m */ = {isa = PBXFileReference; name = "SQLitePlugin.m"; path = "cordova-sqlite-storage/SQLitePlugin.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		629C98336B22415DA1B077B0 /* sqlite3.c */ = {isa = PBXFileReference; name = "sqlite3.c"; path = "cordova-sqlite-storage/sqlite3.c"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		50DFED075E9C486887E63135 /* SQLitePlugin.h */ = {isa = PBXFileReference; name = "SQLitePlugin.h"; path = "cordova-sqlite-storage/SQLitePlugin.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		114FFB5CB0794B08B989770E /* sqlite3.h */ = {isa = PBXFileReference; name = "sqlite3.h"; path = "cordova-sqlite-storage/sqlite3.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +192,10 @@
 				0829FD28C0764EA69503EFD2 /* CDVStatusBar.h */,
 				32E0D72CD12E4589B4452E7D /* IonicKeyboard.m */,
 				555D023D0DDD437A84044126 /* IonicKeyboard.h */,
+				4D4D08DE45B2499F89882D00 /* SQLitePlugin.m */,
+				629C98336B22415DA1B077B0 /* sqlite3.c */,
+				50DFED075E9C486887E63135 /* SQLitePlugin.h */,
+				114FFB5CB0794B08B989770E /* sqlite3.h */,
 			);
 			name = Plugins;
 			path = "HelloCordova/Plugins";
@@ -306,6 +316,8 @@
 				56D49E14904F442DACDC65C8 /* CDVViewController+SplashScreen.m in Sources */,
 				EDE004E29B4C41029C2621F9 /* CDVStatusBar.m in Sources */,
 				57F024296FF8472E8F5B70D9 /* IonicKeyboard.m in Sources */,
+				2EA4BDEE3B4B45FFB6F2E958 /* SQLitePlugin.m in Sources */,
+				06BC27ADB46B4002A3215313 /* sqlite3.c in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

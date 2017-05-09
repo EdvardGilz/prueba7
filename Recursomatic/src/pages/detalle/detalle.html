@@ -1,0 +1,57 @@
+<!--
+  Generated template for the Detalle page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Detalle</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          <h1>Nombre del proyecto:</h1>
+        </ion-col>
+        <ion-col>
+          <h1>{{data.proyecto}}</h1>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      
+      <ion-row>
+        <ion-col col-6 col-md-3 col-lg-2>
+          Tiempo:
+        </ion-col>
+        <ion-col col-6 col-md-3 col-lg-2>
+          {{data.tiempo}}
+        </ion-col>
+        <ion-col col-6 col-md-3 col-lg-2>
+          Costo recursos:
+        </ion-col>
+        <ion-col col-6 col-md-3 col-lg-2>
+          {{data.total | currency:'USD':true:'1.2-2'}}
+        </ion-col>
+      </ion-row>
+
+      <ion-list>
+        <ion-item *ngFor="let recurso of data.recursos">
+          {{recurso.cantidad}} {{recurso.txt1}} > {{recurso.nombre}}
+          <p>{{recurso.precio | currency:'USD':true:'1.2-2'}} {{recurso.txt2}}</p>
+          <p>Total: {{recurso.total | currency:'USD':true:'1.2-2'}}</p>
+        </ion-item>
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+
+  <button ion-button (click)="volver()">Volver</button>
+</ion-content>
