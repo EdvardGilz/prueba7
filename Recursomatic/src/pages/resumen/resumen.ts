@@ -26,6 +26,8 @@ export class Resumen {
     for (var i=0; i<this.productos.length; i++) {
       this.productos[i].activo = false;
       this.productos[i].cantidad = "";
+      this.productos[i].cantidad1 = "";
+      this.productos[i].cantidad2 = "";
     }
   }
 
@@ -34,12 +36,21 @@ export class Resumen {
     this.data = [];
 
     for (var i=0; i<this.productos.length; i++) {
-      if (this.productos[i].activo == true && this.productos[i].cantidad && this.productos[i].cantidad != "") {
+      if (this.productos[i].activo == true && ((this.productos[i].cantidad && this.productos[i].cantidad != "") || (this.productos[i].cantidad1 && this.productos[i].cantidad1 != "" && this.productos[i].cantidad2 && this.productos[i].cantidad2 != ""))) {
         activo = true;
         if (this.productos[i].tipo == 0) {
-          if (parseFloat(this.productos[i].cantidad) <= this.productos[i].pzas) {
+          var cantidad1;
+          var cantidad2;
+          var m2;
+
+          cantidad1 = parseFloat(this.productos[i].cantidad1);
+          cantidad2 = parseFloat(this.productos[i].cantidad2);
+          m2 = (cantidad1 * cantidad2).toFixed(3);
+          
+          if (parseFloat(m2) <= parseFloat(this.productos[i].m2)) {
             this.productos[i].pas = false;
-            this.data.push({"index": i, "cantidad": parseFloat(this.productos[i].cantidad)});
+            this.productos[i].cantidad = m2
+            this.data.push({"index": i});
           }
           else {
             activo = false;
@@ -49,7 +60,7 @@ export class Resumen {
         else {
           if (parseInt(this.productos[i].cantidad) <= this.productos[i].pzas) {
             this.productos[i].pas = false;
-            this.data.push({"index": i, "cantidad": parseInt(this.productos[i].cantidad)});
+            this.data.push({"index": i});
           }
           else {
             activo = false;

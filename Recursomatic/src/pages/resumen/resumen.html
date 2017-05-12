@@ -24,13 +24,16 @@
     <ion-item>
       <ion-label>
         {{producto.nombre}}
-        <p>{{producto.pzas}} {{producto.txt1}} > {{producto.precio | currency:'USD':true:'1.2-2'}} {{producto.txt2}}</p>
+        <p *ngIf="producto.tipo == 1">{{producto.pzas}} {{producto.txt1}} > {{producto.precio | currency:'USD':true:'1.2-2'}} {{producto.txt2}}</p>
+        <p *ngIf="producto.tipo == 0">{{producto.pzas}} {{producto.txt1}} x {{producto.medida2}} {{producto.txt1}} > {{producto.precio | currency:'USD':true:'1.2-2'}}</p>
+        <p *ngIf="producto.tipo == 0">{{producto.m2}} m<sup>2</sup></p>
       </ion-label>
       <ion-toggle [(ngModel)]="producto.activo" (ionChange)="cambio()"></ion-toggle>
     </ion-item>
     <ion-item *ngIf="producto.activo == true" no-lines>
       <ion-input type="number" placeholder="Piezas ocupadas" [(ngModel)]="producto.cantidad" *ngIf="producto.tipo == 1" (input)="cambio()"></ion-input>
-      <ion-input type="number" placeholder="Metros ocupados" [(ngModel)]="producto.cantidad" *ngIf="producto.tipo == 0" (input)="cambio()"></ion-input>
+      <ion-input type="number" placeholder="Metros ocupados (largo)" [(ngModel)]="producto.cantidad1" *ngIf="producto.tipo == 0" (input)="cambio()"></ion-input>
+      <ion-input type="number" placeholder="Metros ocupados (ancho)" [(ngModel)]="producto.cantidad2" *ngIf="producto.tipo == 0" (input)="cambio()"></ion-input>
     </ion-item>
     <ion-item *ngIf="producto.pas == true && producto.activo == true" no-lines>
       <small>*Ya se paso</small>

@@ -18,7 +18,6 @@ export class Detalle {
   constructor(public navParams: NavParams,
               public viewCtrl: ViewController) {
     this.data = navParams.get('data');
-    console.log(this.data);
   }
 
   volver() {

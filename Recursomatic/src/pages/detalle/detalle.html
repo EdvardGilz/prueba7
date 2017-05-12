@@ -43,8 +43,9 @@
       </ion-row>
 
       <ion-list>
+        <ion-item>Desglose de recursos:</ion-item>
         <ion-item *ngFor="let recurso of data.recursos">
-          {{recurso.cantidad}} {{recurso.txt1}} > {{recurso.nombre}}
+          {{recurso.cantidad}} {{recurso.txt1}}<sup *ngIf="recurso.tipo == 0">2</sup> > {{recurso.nombre}}
           <p>{{recurso.precio | currency:'USD':true:'1.2-2'}} {{recurso.txt2}}</p>
           <p>Total: {{recurso.total | currency:'USD':true:'1.2-2'}}</p>
         </ion-item>

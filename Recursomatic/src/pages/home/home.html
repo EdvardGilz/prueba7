@@ -47,7 +47,7 @@
             </ion-list>
           </ion-card-content>
 
-          <button ion-button block (click)="terminarP(proyecto, i)">Terminar Proyecto</button>
+          <button [disabled]="proyecto.cuenta == 0" ion-button block (click)="terminarP(proyecto, i)">Terminar Proyecto</button>
 
         </ion-card>
       </ion-item>
@@ -62,7 +62,9 @@
       <ion-item *ngFor="let producto of productos; let i = index">
         <ion-label>
           {{producto.nombre}}
-          <p>{{producto.pzas}} {{producto.txt1}} > {{producto.precio | currency:'USD':true:'1.2-2'}} {{producto.txt2}}</p>
+          <p *ngIf="producto.tipo == 1">{{producto.pzas}} {{producto.txt1}} > {{producto.precio | currency:'USD':true:'1.2-2'}} {{producto.txt2}}</p>
+          <p *ngIf="producto.tipo == 0">{{producto.pzas}} {{producto.txt1}} x {{producto.medida2}} {{producto.txt1}} > {{producto.precio | currency:'USD':true:'1.2-2'}}</p>
+          <p *ngIf="producto.tipo == 0">{{producto.m2}} m<sup>2</sup></p>
         </ion-label>
         <ion-note item-right>
           <ion-icon name='close' (click)="eliminarP(i)"></ion-icon>

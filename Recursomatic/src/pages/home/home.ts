@@ -23,7 +23,7 @@ export class HomePage {
               public actionSheetCtrl: ActionSheetController,
               public platform: Platform,
               public modalCtrl: ModalController,
-              private backgroundMode: BackgroundMode) {
+              public backgroundMode: BackgroundMode) {
     
     this.storage.ready().then(() => {
       this.storage.get("proyectos").then((data) => {
@@ -43,7 +43,7 @@ export class HomePage {
       });
     });
 
-    this.backgroundMode.enable();
+    !this.platform.is('ios') ? this.backgroundMode.overrideBackButton() : null
   }
 
   verificarProductos() {
@@ -112,6 +112,7 @@ export class HomePage {
     this.stop(0);
     var i = proyecto.cuenta;
     if (proyecto.start == false) {
+      this.backgroundMode.enable();
       proyecto.start = true;
       this.subscription = Observable.interval(1000).subscribe(() => {
         i++;
@@ -129,6 +130,7 @@ export class HomePage {
       proyecto.icono = "radio-button-on";
     }
     else {
+      this.backgroundMode.disable();
       this.stop(0);
       proyecto.start = false;
     }
@@ -171,19 +173,18 @@ export class HomePage {
     modal.onDidDismiss(data => {
       if (data != null) {
         if (data.success == 1) {
-
           for (var i=0; i<data.data.length; i++) {
             var prod = this.productos[data.data[i].index];
             
             if (prod.tipo == 1) {
-              prod.pzas = prod.pzas - data.data[i].cantidad;
-              precioTotal = (data.data[i].cantidad * parseFloat(prod.precio)).toFixed(2);
-              cont.push({"total": precioTotal, "nombre": prod.nombre, "precio": prod.precio, "txt1": prod.txt1, "txt2": prod.txt2, "cantidad": data.data[i].cantidad});
+              prod.pzas = prod.pzas - parseInt(prod.cantidad);
+              precioTotal = (parseInt(prod.cantidad) * parseFloat(prod.precio)).toFixed(2);
+              cont.push({"total": precioTotal, "nombre": prod.nombre, "precio": prod.precio, "txt1": prod.txt1, "txt2": prod.txt2, "cantidad": parseInt(prod.cantidad), "tipo": prod.tipo});
             }
             else {
-              prod.pzas = (((prod.pzas * 100) - (data.data[i].cantidad * 100)) / 100).toFixed(2);
-              precioTotal = (((data.data[i].cantidad * 100) * parseFloat(prod.precio))/100).toFixed(2);
-              cont.push({"total": precioTotal, "nombre": prod.nombre, "precio": prod.precio, "txt1": prod.txt1, "txt2": prod.txt2, "cantidad": data.data[i].cantidad});
+              prod.m2 = parseFloat(( ((prod.m2 * 100) - (prod.cantidad * 100)) / 100).toFixed(3));
+              precioTotal = (((prod.cantidad * 100) * parseFloat(prod.precio))/100).toFixed(2);
+              cont.push({"total": precioTotal, "nombre": prod.nombre, "precio": prod.precio, "txt1": prod.txt1, "txt2": prod.txt2, "cantidad": parseFloat(prod.cantidad), "tipo": prod.tipo});
             }
             this.storage.set("productos", this.productos);
             Total += parseFloat(precioTotal);
@@ -276,10 +277,10 @@ export class HomePage {
     var txt2;
 
     if (ban == 0) {
-      pzasTxt = "Metros";
-      precioTxt = "Precio por metro";
+      pzasTxt = "Largo";
+      precioTxt = "Precio total";
       txt1 = "m";
-      txt2 = "el metro";
+      txt2 = "";
     }
     else {
       pzasTxt = "Piezas";
@@ -292,52 +293,67 @@ export class HomePage {
       title: "Nuevo Producto",
       inputs: [
         {
-          name: "pzas",
-          placeholder: pzasTxt,
-          type: "number"
-        },
-        {
           name: "nombre",
           placeholder: "Nombre del producto",
           type: "text"
         },
         {
-          name: "precio",
-          placeholder: precioTxt,
+          name: "pzas",
+          placeholder: pzasTxt,
           type: "number"
         }
-      ],
-      buttons: [
-        {
-          text: "Cancelar",
-          role: "cancel"
-        },
-        {
-          text: "Aceptar",
-          handler: data => {
-            if (data.pzas != "" && data.nombre != "" && data.precio != "") {
-              this.storage.get("productos").then((res) => {
-                var piezas;
-                if (ban == 0) {
-                  piezas = parseFloat(data.pzas);
-                }
-                else {
-                  piezas = parseInt(data.pzas);
-                }
-                if (res != null) {
-                  this.productos = res;
-                  this.productos.unshift({"pzas": piezas, "nombre": data.nombre, "precio": data.precio, "txt1": txt1, "txt2": txt2, "tipo": ban, "activo": false});
-                  this.storage.set("productos", this.productos);
-                }
-                else {
-                  this.productos.unshift({"pzas": piezas, "nombre": data.nombre, "precio": data.precio, "txt1": txt1, "txt2": txt2, "tipo": ban, "activo": false});
-                  this.storage.set("productos", this.productos);
-                }
-              });
-            }
-          }
-        }
       ]
+    });
+
+    if (ban == 0) {
+      prompt.addInput({
+        name: "medida2",
+        placeholder: "Ancho",
+        type: "number"
+      });
+    }
+
+    prompt.addInput({
+      name: "precio",
+      placeholder: precioTxt,
+      type: "number"
+    });
+
+    prompt.addButton({
+      text: "Cancelar",
+      role: "cancel"
+    });
+
+    prompt.addButton({
+      text: "Aceptar",
+      handler: data => {
+        var medida2 = 0;
+        var m2 = "";
+        if (data.pzas != "" && data.nombre != "" && data.precio != "") {
+          this.storage.get("productos").then((res) => {
+            var piezas;
+            if (ban == 0) {
+              if (data.medida2 != "") {
+                piezas = parseFloat(data.pzas);
+                medida2 = parseFloat(data.medida2);
+                m2 = (piezas * medida2).toFixed(3);
+              }
+            }
+            else {
+              piezas = parseInt(data.pzas);
+            }
+            if (res != null) {
+              this.productos = res;
+              this.productos.unshift({"pzas": piezas, "medida2": medida2, "m2": parseFloat(m2), "nombre": data.nombre, "precio": data.precio, "txt1": txt1, "txt2": txt2, "tipo": ban, "activo": false});
+              this.storage.set("productos", this.productos);
+            }
+            else {
+              this.productos.unshift({"pzas": piezas, "medida2": medida2, "m2": parseFloat(m2), "nombre": data.nombre, "precio": data.precio, "txt1": txt1, "txt2": txt2, "tipo": ban, "activo": false});
+              this.storage.set("productos", this.productos);
+            }
+          });
+        }
+      }
     });
 
     prompt.present();
