@@ -319,6 +319,12 @@ export class HomePage {
       type: "number"
     });
 
+    prompt.addInput({
+      name: "lugarCompra",
+      placeholder: "Lugar de compra (Opcional)",
+      type: "text"
+    });
+
     prompt.addButton({
       text: "Cancelar",
       role: "cancel"
@@ -344,16 +350,58 @@ export class HomePage {
             }
             if (res != null) {
               this.productos = res;
-              this.productos.unshift({"pzas": piezas, "medida2": medida2, "m2": parseFloat(m2), "nombre": data.nombre, "precio": data.precio, "txt1": txt1, "txt2": txt2, "tipo": ban, "activo": false});
+              this.productos.unshift({"pzas": piezas, "medida2": medida2, "m2": parseFloat(m2), "nombre": data.nombre, "precio": data.precio, "txt1": txt1, "txt2": txt2, "tipo": ban, "activo": false, "lugarCompra": data.lugarCompra});
               this.storage.set("productos", this.productos);
             }
             else {
-              this.productos.unshift({"pzas": piezas, "medida2": medida2, "m2": parseFloat(m2), "nombre": data.nombre, "precio": data.precio, "txt1": txt1, "txt2": txt2, "tipo": ban, "activo": false});
+              this.productos.unshift({"pzas": piezas, "medida2": medida2, "m2": parseFloat(m2), "nombre": data.nombre, "precio": data.precio, "txt1": txt1, "txt2": txt2, "tipo": ban, "activo": false, "lugarCompra": data.lugarCompra});
               this.storage.set("productos", this.productos);
             }
           });
         }
       }
+    });
+
+    prompt.present();
+  }
+
+  modificar(producto) {
+    var mensaje;
+    var placeholder;
+
+    if (producto.lugarCompra && producto.lugarCompra != "") {
+      mensaje = producto.lugarCompra;
+      placeholder = "Modificar";
+    }
+    else {
+      mensaje = "No hay lugar de compra, ingresa uno."
+      placeholder = "Ingresar (Opcional)";
+    }
+    let prompt = this.alertCtrl.create({
+      title: "Lugar de compra",
+      message: mensaje,
+      inputs: [
+        {
+          name: "lugarCompra",
+          type: "text",
+          placeholder: placeholder
+        }
+      ],
+      buttons: [
+        {
+          text: "Cancelar",
+          role: "cancel"
+        },
+        {
+          text: "Aceptar",
+          handler: data => {
+            if (data.lugarCompra != "") {
+              producto.lugarCompra = data.lugarCompra;
+              this.storage.set("productos", this.productos);
+            }
+          }
+        }
+      ]
     });
 
     prompt.present();

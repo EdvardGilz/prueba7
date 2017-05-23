@@ -59,12 +59,13 @@
 
 
     <ion-list *ngSwitchCase="'stock'">
-      <ion-item *ngFor="let producto of productos; let i = index">
+      <ion-item *ngFor="let producto of productos; let i = index" (click)="modificar(producto)">
         <ion-label>
           {{producto.nombre}}
           <p *ngIf="producto.tipo == 1">{{producto.pzas}} {{producto.txt1}} > {{producto.precio | currency:'USD':true:'1.2-2'}} {{producto.txt2}}</p>
           <p *ngIf="producto.tipo == 0">{{producto.pzas}} {{producto.txt1}} x {{producto.medida2}} {{producto.txt1}} > {{producto.precio | currency:'USD':true:'1.2-2'}}</p>
           <p *ngIf="producto.tipo == 0">{{producto.m2}} m<sup>2</sup></p>
+          <p *ngIf="producto.lugarCompra !='' ">{{producto.lugarCompra}}</p>
         </ion-label>
         <ion-note item-right>
           <ion-icon name='close' (click)="eliminarP(i)"></ion-icon>
