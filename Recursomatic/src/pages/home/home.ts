@@ -183,9 +183,8 @@ export class HomePage {
             }
             else if (prod.tipo == 2) {
               prod.pzas = prod.pzas - parseFloat(prod.cantidad);
-              var valorUnitario2 = parseFloat(prod.precio) / parseFloat(prod.pzasTotales);
-              precioTotal = (parseFloat(prod.cantidad) * valorUnitario2).toFixed(2);
-              cont.push({"total": precioTotal, "nombre": prod.nombre, "precio": (valorUnitario2).toFixed(2), "txt1": prod.txt1, "cantidad": parseFloat(prod.cantidad), "tipo": prod.tipo});
+              precioTotal = ((parseFloat(prod.cantidad) * parseFloat(prod.precio)) /  parseFloat(prod.pzasTotales) ).toFixed(2);
+              cont.push({"total": precioTotal, "nombre": prod.nombre, "precio": parseFloat(prod.precio).toFixed(2), "txt1": prod.txt1, "cantidad": parseFloat(prod.cantidad), "tipo": prod.tipo});
             }
             else {
               prod.m2 = parseFloat((prod.m2 - parseFloat(prod.cantidad)).toFixed(3));
