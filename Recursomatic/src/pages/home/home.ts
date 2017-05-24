@@ -175,7 +175,6 @@ export class HomePage {
         if (data.success == 1) {
           for (var i=0; i<data.data.length; i++) {
             var prod = this.productos[data.data[i].index];
-            console.log(prod);
             if (prod.tipo == 1) {
               prod.pzas = prod.pzas - parseInt(prod.cantidad);
               var valorUnitario = parseFloat(prod.precio) / prod.pzasTotales;
