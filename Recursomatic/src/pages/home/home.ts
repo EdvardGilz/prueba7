@@ -175,16 +175,23 @@ export class HomePage {
         if (data.success == 1) {
           for (var i=0; i<data.data.length; i++) {
             var prod = this.productos[data.data[i].index];
-            
+            console.log(prod);
             if (prod.tipo == 1) {
               prod.pzas = prod.pzas - parseInt(prod.cantidad);
-              precioTotal = (parseInt(prod.cantidad) * parseFloat(prod.precio)).toFixed(2);
-              cont.push({"total": precioTotal, "nombre": prod.nombre, "precio": prod.precio, "txt1": prod.txt1, "txt2": prod.txt2, "cantidad": parseInt(prod.cantidad), "tipo": prod.tipo});
+              var valorUnitario = parseFloat(prod.precio) / prod.pzasTotales;
+              precioTotal = (parseInt(prod.cantidad) * valorUnitario).toFixed(2);
+              cont.push({"total": precioTotal, "nombre": prod.nombre, "precio": valorUnitario, "txt1": prod.txt1, "cantidad": parseInt(prod.cantidad), "tipo": prod.tipo});
+            }
+            else if (prod.tipo == 2) {
+              prod.pzas = prod.pzas - parseFloat(prod.cantidad);
+              var valorUnitario2 = parseFloat(prod.precio) / parseFloat(prod.pzasTotales);
+              precioTotal = (parseFloat(prod.cantidad) * valorUnitario2).toFixed(2);
+              cont.push({"total": precioTotal, "nombre": prod.nombre, "precio": (valorUnitario2).toFixed(2), "txt1": prod.txt1, "cantidad": parseFloat(prod.cantidad), "tipo": prod.tipo});
             }
             else {
-              prod.m2 = parseFloat(( ((prod.m2 * 100) - (prod.cantidad * 100)) / 100).toFixed(3));
-              precioTotal = (((prod.cantidad * 100) * parseFloat(prod.precio))/100).toFixed(2);
-              cont.push({"total": precioTotal, "nombre": prod.nombre, "precio": prod.precio, "txt1": prod.txt1, "txt2": prod.txt2, "cantidad": parseFloat(prod.cantidad), "tipo": prod.tipo});
+              prod.m2 = parseFloat((prod.m2 - parseFloat(prod.cantidad)).toFixed(3));
+              precioTotal = ((parseFloat(prod.cantidad) * parseFloat(prod.precio)) / parseFloat(prod.pzasTotales)).toFixed(2);
+              cont.push({"total": precioTotal, "nombre": prod.nombre, "precio": prod.precio, "txt1": prod.txt1, "cantidad": parseFloat(prod.cantidad), "tipo": prod.tipo});
             }
             this.storage.set("productos", this.productos);
             Total += parseFloat(precioTotal);
@@ -236,7 +243,7 @@ export class HomePage {
 
     let alert = this.alertCtrl.create({
       title: "Total invertido",
-      message: "Invertiste $" + Total + " en materiales para este proyecto y " + dias + horas + minutos,
+      message: "Invertiste $" + Total.toFixed(2) + " en materiales para este proyecto y " + dias + horas + minutos,
       buttons: ['OK']
     });
     alert.present();
@@ -246,10 +253,17 @@ export class HomePage {
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [
         {
-          text: "Por metro",
+          text: "Por metro cuadrado",
           icon: !this.platform.is('ios') ? 'infinite' : null,
           handler: () => {
             this.agregarNuevo(0);
+          }
+        },
+        {
+          text: "Por metro lineal",
+          icon: !this.platform.is('ios') ? 'infinite' : null,
+          handler: () => {
+            this.agregarNuevo(2);
           }
         },
         {
@@ -274,19 +288,21 @@ export class HomePage {
     var pzasTxt;
     var precioTxt;
     var txt1;
-    var txt2;
 
     if (ban == 0) {
       pzasTxt = "Largo";
-      precioTxt = "Precio total";
+      precioTxt = "Precio Total";
       txt1 = "m";
-      txt2 = "";
     }
-    else {
+    else if (ban == 1) {
       pzasTxt = "Piezas";
-      precioTxt = "Precio por pieza";
+      precioTxt = "Precio Total";
       txt1 = "pzas";
-      txt2 = "la pieza";
+    }
+    else if (ban == 2) {
+      pzasTxt = "Metros";
+      precioTxt = "Precio Total";
+      txt1 = "m";
     }
 
     let prompt = this.alertCtrl.create({
@@ -321,7 +337,7 @@ export class HomePage {
 
     prompt.addInput({
       name: "lugarCompra",
-      placeholder: "Lugar de compra (Opcional)",
+      placeholder: "Notas (Opcional)",
       type: "text"
     });
 
@@ -335,6 +351,8 @@ export class HomePage {
       handler: data => {
         var medida2 = 0;
         var m2 = "";
+        var pzasTotales;
+
         if (data.pzas != "" && data.nombre != "" && data.precio != "") {
           this.storage.get("productos").then((res) => {
             var piezas;
@@ -343,18 +361,20 @@ export class HomePage {
                 piezas = parseFloat(data.pzas);
                 medida2 = parseFloat(data.medida2);
                 m2 = (piezas * medida2).toFixed(3);
+                pzasTotales = parseFloat(m2);
               }
             }
             else {
               piezas = parseInt(data.pzas);
+              pzasTotales = piezas;
             }
             if (res != null) {
               this.productos = res;
-              this.productos.unshift({"pzas": piezas, "medida2": medida2, "m2": parseFloat(m2), "nombre": data.nombre, "precio": data.precio, "txt1": txt1, "txt2": txt2, "tipo": ban, "activo": false, "lugarCompra": data.lugarCompra});
+              this.productos.unshift({"pzasTotales": pzasTotales, "pzas": piezas, "medida2": medida2, "m2": parseFloat(m2), "nombre": data.nombre, "precio": data.precio, "txt1": txt1, "tipo": ban, "activo": false, "lugarCompra": data.lugarCompra});
               this.storage.set("productos", this.productos);
             }
             else {
-              this.productos.unshift({"pzas": piezas, "medida2": medida2, "m2": parseFloat(m2), "nombre": data.nombre, "precio": data.precio, "txt1": txt1, "txt2": txt2, "tipo": ban, "activo": false, "lugarCompra": data.lugarCompra});
+              this.productos.unshift({"pzasTotales": pzasTotales, "pzas": piezas, "medida2": medida2, "m2": parseFloat(m2), "nombre": data.nombre, "precio": data.precio, "txt1": txt1, "tipo": ban, "activo": false, "lugarCompra": data.lugarCompra});
               this.storage.set("productos", this.productos);
             }
           });

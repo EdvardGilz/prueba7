@@ -62,10 +62,12 @@
       <ion-item *ngFor="let producto of productos; let i = index" (click)="modificar(producto)">
         <ion-label>
           {{producto.nombre}}
-          <p *ngIf="producto.tipo == 1">{{producto.pzas}} {{producto.txt1}} > {{producto.precio | currency:'USD':true:'1.2-2'}} {{producto.txt2}}</p>
-          <p *ngIf="producto.tipo == 0">{{producto.pzas}} {{producto.txt1}} x {{producto.medida2}} {{producto.txt1}} > {{producto.precio | currency:'USD':true:'1.2-2'}}</p>
-          <p *ngIf="producto.tipo == 0">{{producto.m2}} m<sup>2</sup></p>
+          <p *ngIf="producto.tipo == 1 || producto.tipo == 2">{{producto.pzasTotales}} {{producto.txt1}} a {{producto.precio | currency:'USD':true:'1.2-2'}}</p>
+          <p *ngIf="producto.tipo == 0">{{producto.pzas}} {{producto.txt1}} x {{producto.medida2}} {{producto.txt1}} a {{producto.precio | currency:'USD':true:'1.2-2'}}</p>
+          <p *ngIf="producto.tipo == 0">{{producto.pzasTotales}} m<sup>2</sup></p>
           <p *ngIf="producto.lugarCompra !='' ">{{producto.lugarCompra}}</p>
+          <p *ngIf="producto.tipo == 1 || producto.tipo == 2">Quedan: {{producto.pzas}} {{producto.txt1}}</p>
+          <p *ngIf="producto.tipo == 0">Quedan: {{producto.m2}} m<sup>2</sup></p>
         </ion-label>
         <ion-note item-right>
           <ion-icon name='close' (click)="eliminarP(i)"></ion-icon>
